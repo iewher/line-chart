@@ -1,5 +1,6 @@
 import './styles.css'
 
+import Header from './Header'
 import { Button } from './Button'
 import { ResponsiveLine, ResponsiveLineCanvas } from '@nivo/line'
 import { inc } from './utils'
@@ -36,16 +37,10 @@ export default function App() {
 
     return (
         <div className='App'>
+            <Header />
             <h1>Nivo Line Template</h1>
             <h2>Fork this template</h2>
             <Button onClick={() => setIteration(inc)}>Generate Data</Button>
-            <Button
-                onClick={() =>
-                    setFlavor((value) => (value !== 'canvas' ? 'canvas' : 'svg'))
-                }
-                >
-                    Use {flavor === 'svg' ? 'Canvas' : 'SVG'}
-            </Button>
             <div className='Chart'>
                 <Chart {...{ flavor, iteration }} />
             </div>
