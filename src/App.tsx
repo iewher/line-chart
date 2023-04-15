@@ -1,9 +1,9 @@
-import './styles.css'
+import './style/styles.css'
 
-import Header from './Header'
-import { Button } from './Button'
+import Header from './components/Header'
+import { Button } from './components/Button'
 import { ResponsiveLine, ResponsiveLineCanvas } from '@nivo/line'
-import { inc } from './utils'
+import { inc } from './components/utils'
 import { generateDrinkStats } from '@nivo/generators'
 import { useState } from 'react'
 
