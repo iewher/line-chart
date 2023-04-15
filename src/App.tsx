@@ -7,7 +7,7 @@ import { inc } from './utils'
 import { generateDrinkStats } from '@nivo/generators'
 import { useState } from 'react'
 
-type Flavor = 'svg' | 'canvas'
+type Flavor = 'svg'
 
 type ChartProps = {
     flavor: Flavor
@@ -22,11 +22,7 @@ const props = {
 } as const
 
 function Chart({ flavor }: ChartProps) {
-    const data = generateDrinkStats(9)
-
-    if (flavor === 'canvas') {
-        return <ResponsiveLineCanvas data={data} {...props} />
-    }
+    const data = generateDrinkStats(24)
 
     return <ResponsiveLine data={data} {...props} />
 }
@@ -37,10 +33,7 @@ export default function App() {
 
     return (
         <div className='App'>
-            <Header />
-            <h1>Nivo Line Template</h1>
-            <h2>Fork this template</h2>
-            <Button onClick={() => setIteration(inc)}>Generate Data</Button>
+            <Header onButtonClick={() => setIteration(inc)} />
             <div className='Chart'>
                 <Chart {...{ flavor, iteration }} />
             </div>
