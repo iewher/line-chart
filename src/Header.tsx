@@ -1,9 +1,14 @@
-import './styles.css'
+import React from 'react';
+import { Button } from './Button';
 
-import React from 'react'
+type HeaderProps = {
+  onButtonClick: () => void;
+};
 
-export default function Header() {
+export default function Header({ onButtonClick }: HeaderProps) {
   return (
-    <div className='header'>Header</div>
-  )
+    <div className='header'>
+      <Button onClick={onButtonClick}>Построить график</Button>
+    </div>
+  );
 }
