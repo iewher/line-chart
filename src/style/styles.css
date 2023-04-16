@@ -26,7 +26,6 @@ body {
     cursor: pointer;
     padding: 10px;
     transition: all 0.2s linear;
-    transition-property: background border-color color opacity;
     width: 150px;
   }
   
@@ -40,6 +39,10 @@ body {
   .Button + .Button {
     margin-left: 10px;
   }
+
+  /*
+  Адаптивность проверил в Toggle device toolbar
+  */
   
   .Chart {
     height: 400px;
@@ -49,6 +52,10 @@ body {
     background: white;
     box-shadow: 0 0 10px 10px rgba(221, 221, 221, 1);
   }
+
+  /*
+  Адаптивность проверил в Toggle device toolbar
+  */
 
   .header {
     background: white;
