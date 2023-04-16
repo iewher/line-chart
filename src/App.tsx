@@ -2,9 +2,10 @@ import './style/styles.css'
 
 import Header from './components/Header'
 import { ResponsiveLine } from '@nivo/line'
+import { ResponsivePie } from '@nivo/pie'
 import { inc } from './components/utils'
-import { generateDrinkStats } from '@nivo/generators'
 import { useState } from 'react'
+import { generateProgrammingLanguageStats } from '@nivo/generators'
 
 type Flavor = 'svg'
 
@@ -13,14 +14,19 @@ type ChartProps = {
     iteration: number
 }
 
-console.clear()
-
-const props = {
+const propsLine = {
     enableSlices: 'x',
     margin: { top: 20, right: 20, bottom: 60, left: 80 },
 } as const
 
-function Chart({ flavor }: ChartProps) {
+const propsPie = {
+    cornerRadius: 5,
+    innerRadius: 0.6,
+    margin: { top: 80, right: 120, bottom: 80, left: 120 },
+    padAngle: 0.5,
+}
+
+function ChartLine({ flavor }: ChartProps) {
     const data = [
         {
     /*
@@ -34,7 +40,7 @@ function Chart({ flavor }: ChartProps) {
     ...
     { x: '23:00', y: Math.round(Math.random() * 100)},
     */
-          id: 'Скорость',
+          id: `км/ч`,
           data: Array.from({ length: 24 }, (_, i) => ({
             x: `${i.toString().padStart(2, '0')}:00`,
             y: Math.round(Math.random() * 100)
@@ -50,8 +56,19 @@ function Chart({ flavor }: ChartProps) {
 
     console.log(data)
 
-    return <ResponsiveLine data={data} {...props} />
+    return <ResponsiveLine data={data} {...propsLine} />
 }
+
+function ChartPie({ flavor }: ChartProps) {
+    const data = generateProgrammingLanguageStats(true, 9).map(
+      ({ label, ...data }) => ({
+        id: label,
+        ...data,
+      })
+    )
+  
+    return <ResponsivePie data={data} {...propsPie} />
+  }
 
 export default function App() {
     const [flavor, setFlavor] = useState<Flavor>('svg')
@@ -61,7 +78,10 @@ export default function App() {
         <div className='App'>
             <Header onButtonClick={() => setIteration(inc)} />
             <div className='Chart'>
-                <Chart {...{ flavor, iteration }} />
+                <ChartLine {...{ flavor, iteration }} />
+            </div>
+            <div className='Pie'>
+                <ChartPie {...{ flavor, iteration }} />
             </div>
         </div>
     )
