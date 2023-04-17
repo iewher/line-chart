@@ -106,6 +106,9 @@ export default function App() {
         <div className='App'>
             <Header onButtonClick={() => setIteration(inc)} />
             <div className='Chart'>
+                <div className='HeaderInChart'>
+                    <h2>Средняя скорость</h2>
+                </div>
                 <ChartLine {...{ flavor, iteration }} />
             </div>
             <div className='Pie'>
