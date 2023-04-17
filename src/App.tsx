@@ -5,7 +5,6 @@ import { ResponsiveLine } from '@nivo/line'
 import { ResponsivePie } from '@nivo/pie'
 import { inc } from './components/utils'
 import { useState } from 'react'
-import { generateProgrammingLanguageStats } from '@nivo/generators'
 
 type Flavor = 'svg'
 
@@ -14,16 +13,27 @@ type ChartProps = {
     iteration: number
 }
 
+/*
+Передаем пропсы для ChartLine
+*/
+
 const propsLine = {
     enableSlices: 'x',
     margin: { top: 20, right: 20, bottom: 60, left: 80 },
+    curve: 'monotoneX'
 } as const
 
+/*
+Передаем пропсы для ChartPie
+*/
+
 const propsPie = {
-    cornerRadius: 5,
-    innerRadius: 0.6,
+    cornerRadius: 10,
+    innerRadius: 0.9,
     margin: { top: 80, right: 120, bottom: 80, left: 120 },
     padAngle: 0.5,
+    enableRadialLabels: true,
+    enableArcLabels: false
 }
 
 function ChartLine({ flavor }: ChartProps) {
@@ -60,14 +70,32 @@ function ChartLine({ flavor }: ChartProps) {
 }
 
 function ChartPie({ flavor }: ChartProps) {
-    const data = generateProgrammingLanguageStats(true, 9).map(
-      ({ label, ...data }) => ({
-        id: label,
-        ...data,
-      })
-    )
   
-    return <ResponsivePie data={data} {...propsPie} />
+  /*
+  Созздаем массив data, в который передаем типы машин, и генерируем случайные значение для каждого из них
+  */
+
+  const data = ['Легковые', 'Мотоц./велос-ды', 'Грузовые', 'Автобусы', 'Автопоезда'].map((id) => ({
+    id,
+    value: Math.round(Math.random() * 100)
+  }));
+
+    console.log(data)
+
+    return (
+      <>
+          <ResponsivePie data={data} {...propsPie} />
+          <div className='Legend'>
+              <ul>
+                  {data.map((item) => (
+                      <li key={item.id}>
+                          {item.id}: {item.value}
+                      </li>
+                  ))}
+              </ul>
+          </div>
+      </>
+    )
   }
 
 export default function App() {
