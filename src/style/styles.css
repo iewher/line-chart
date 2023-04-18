@@ -66,7 +66,7 @@ body {
     }
 
     .Directions {
-      display: flex;
+      width: 250px;
     }
     
     .Directions h2 {
