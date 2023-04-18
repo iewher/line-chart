@@ -6,8 +6,11 @@ import { ResponsivePie } from '@nivo/pie'
 import { inc } from './components/utils'
 import { useState } from 'react'
 
-
 type Flavor = 'svg'
+
+/*
+Указываем типы для ChartProps
+*/
 
 type ChartProps = {
     flavor: Flavor
@@ -38,8 +41,7 @@ const propsPie = {
 }
 
 function ChartLine({ flavor }: ChartProps) {
-    const data = [
-        {
+
     /*
     Создаю цикл, который генерирует время по X
     Этот цикл создает массив с одним обьектом, содержащим массив данных для графика
@@ -51,12 +53,25 @@ function ChartLine({ flavor }: ChartProps) {
     ...
     { x: '23:00', y: Math.round(Math.random() * 100)},
     */
-          id: `км/ч`,
-          data: Array.from({ length: 24 }, (_, i) => ({
-            x: `${i.toString().padStart(2, '0')}:00`,
-            y: Math.round(Math.random() * 100)
-          }))
-        }
+
+    const firstData = Array.from({ length: 24 }, (_, i) => ({
+        x: `${i.toString().padStart(2, '0')}:00`,
+        y: Math.round(Math.random() * 100),
+      }));
+
+      const secondData = firstData.map((point) => ({
+        x: point.x,
+
+        /*
+        Теперь вторая линия на графике не может уйти в отрицательное значение
+        */
+
+        y: Math.max(0, point.y - 20), 
+      }));
+      
+    const data = [
+        { id: `км/ч`, data: firstData },
+        { id: `км/ч-2`, data: secondData }
       ];
 
     /*
@@ -67,7 +82,7 @@ function ChartLine({ flavor }: ChartProps) {
 
     console.log(data)
 
-    return <ResponsiveLine data={data} {...propsLine} />
+    return <ResponsiveLine data={data} {...propsLine} colors={['green', 'red']}/>
 }
 
 function ChartPie({ flavor }: ChartProps) {
@@ -87,7 +102,7 @@ function ChartPie({ flavor }: ChartProps) {
       <>
           <ResponsivePie data={data} {...propsPie} />
           <div className='Legend'>
-              <ul>
+              <ul> 
                   {data.map((item) => (
                       <li key={item.id}>
                           {item.id}: {item.value}
@@ -111,7 +126,6 @@ export default function App() {
                     <div className='HeaderInChart'> 
                         <h2>Средняя скорость</h2>
                     </div>
-                    
                 </div>
                 <div className='chart-container'>
                     <ChartLine {...{ flavor, iteration }} />
