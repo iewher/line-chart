@@ -1,11 +1,26 @@
 import { ReactNode, useEffect, useState } from 'react'
 
+/*
+Указываем типы для ButtonProps
+*/
+
 type ButtonProps = {
     children: ReactNode
     onClick: () => void
 }
 
+/*
+Экспортируем компонент Button, для последующего использования в хедере
+В пропсы передаем дочерний элемент children
+Когда кнопка нажата, состояние isPressing устанавливает значение true
+*/
+
 export function Button({ children, onClick }: ButtonProps) {
+
+/*
+Используем хук для отслеживания состояния кнопки
+*/
+
     const [isPressing, setIsPressing] = useState(false)
 
     useEffect(() => {
