@@ -27,7 +27,7 @@ body {
     padding: 10px;
     transition: all 0.2s linear;
     width: 150px;
-    margin-right: 10px
+    margin-right: 10px;
   }
   
   .Button:hover {
@@ -35,10 +35,6 @@ body {
     border-color: #ffffff;
     color: red;
     border-color: red;
-  }
-  
-  .Button + .Button {
-    margin-left: 10px;
   }
 
   /*
@@ -111,7 +107,7 @@ body {
     margin: 0 auto;
     margin-top: 10px;
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
     box-shadow: 0 0 10px 10px rgba(221, 221, 221, 1); 
   }
