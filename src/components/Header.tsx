@@ -2,15 +2,27 @@ import React, { useState } from 'react';
 import { Button } from './Button';
 import SelectComponent from './SelectComponent'
 
+/*
+Указываем типы для HeaderProps
+*/
+
 type HeaderProps = {
   onButtonClick: () => void;
 };
+
+/*
+Указываем типы для SelectProps
+*/
 
 type SelectProps = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: { value: string; label: string }[];
 };
+
+/*
+Создаем реакт компонент Select, который создает выпадающий список с выбором
+*/
 
 const Select: React.FC<SelectProps> = ({ value, onChange, options }) => (
   <select value={value} onChange={onChange}>
@@ -22,12 +34,26 @@ const Select: React.FC<SelectProps> = ({ value, onChange, options }) => (
   </select>
 );
 
-const timeOptions = Array.from({ length: 24 }, (_, i) => ({
-  value: `${i.toString().padStart(2, '0')}:00`,
-  label: `${i.toString().padStart(2, '0')}:00`,
-}));
+/*
+Создаем массив обьектов, каждый из которых предоставляет опцию выбора времени и даты
+*/
+
+const timeOptions = Array.from({ length: 168 }, (_, i) => {
+  const date = new Date(Date.now() + i * 60 * 60 * 1000);
+  const dateStr = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
+  const timeStr = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+  return {
+    value: `${dateStr} ${timeStr}`,
+    label: `${dateStr} ${timeStr}`
+  };
+});
 
 export default function Header({ onButtonClick }: HeaderProps) {
+
+/*
+Используем хук UseState для создания трех состояниий
+*/
+  
   const [startInterval, setStartInterval] = useState('');
   const [endInterval, setEndInterval] = useState('');
   const [selectedOption, setSelectedOption] = useState<{ value: string, label: string } | null>(null)
@@ -36,39 +62,42 @@ export default function Header({ onButtonClick }: HeaderProps) {
       setSelectedOption(options)
   }
 
-  const options = [
-      {value: '1', label: 'Направление 1'},
-      {value: '2', label: 'Направление 2'},
-      {value: '3', label: 'Направление 3'},
-      {value: '4', label: 'Направление 4'},
-      {value: '5', label: 'Направление 5'}
-  ]
+/*
+СОздаем названия элементов для дропдаун списка
+*/
+
+  const directions = ['Направление 1', 'Направление 2', 'Направление 3', 'Направление 4', 'Направление 5'];
+
+  const options = directions.map((direction, index) => ({
+    value: `${index + 1}`,
+    label: direction
+  }));
 
   return (
     <div className='header'>
       <h2>Период:</h2>
-      <h2 className='from'>с:</h2>
+      <h2 className='from'>с</h2>
       <Select 
         value={startInterval}
         onChange={(e) => setStartInterval(e.target.value)}
         options={timeOptions}
         />
-      <h2 className='to'>до:</h2>
+      <h2 className='to'>до</h2>
       <Select 
         value={endInterval}
         onChange={(e) => setEndInterval(e.target.value)}
         options={timeOptions}
         />
       <h2 className='interval'>Интервал:</h2>
-      <div className='Directions'>
-        <h2>Направления:</h2>
+      <h2>Направления:</h2>
+        <div className='Directions'>
           <SelectComponent 
           options={options}
           selectedOption={selectedOption}
           handleChange={handleChange}
           />
-      </div>
-        <Button onClick={onButtonClick}>Построить график</Button>
+        </div>
+        <Button onClick={onButtonClick}>Построить</Button>
     </div>
   );
 }
