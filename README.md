@@ -1,4 +1,4 @@
-## Quick reference
+# Quick reference
 
 <image src="public/forReadme.jpg">
 
