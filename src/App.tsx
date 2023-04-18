@@ -5,6 +5,7 @@ import { ResponsiveLine } from '@nivo/line'
 import { ResponsivePie } from '@nivo/pie'
 import { inc } from './components/utils'
 import { useState } from 'react'
+import Select from 'react-select'
 
 type Flavor = 'svg'
 
@@ -82,6 +83,8 @@ function ChartPie({ flavor }: ChartProps) {
 
     console.log(data)
 
+
+
     return (
       <>
           <ResponsivePie data={data} {...propsPie} />
@@ -101,15 +104,36 @@ function ChartPie({ flavor }: ChartProps) {
 export default function App() {
     const [flavor, setFlavor] = useState<Flavor>('svg')
     const [iteration, setIteration] = useState(inc)
+    const [selectedOption, setSelectedOption] = useState<{ value: string, label: string } | null>(null)
+
+    const handleChange = (option: any) => {
+        setSelectedOption(option)
+    }
+
+    const options = [
+        {value: '1', label: 'Направление 1'},
+        {value: '2', label: 'Направление 2'},
+        {value: '3', label: 'Направление 3'},
+        {value: '4', label: 'Направление 4'},
+        {value: '5', label: 'Направление 5'}
+    ]
 
     return (
         <div className='App'>
             <Header onButtonClick={() => setIteration(inc)} />
-            <div className='Chart'>
-                <div className='HeaderInChart'>
-                    <h2>Средняя скорость</h2>
+            <div className='Chart'> 
+                <div className='text'>
+                    <div className='HeaderInChart'> 
+                        <h2>Средняя скорость</h2>
+                    </div>
+                    <div className='Directions'>
+                        <h2>Направления:</h2>
+                        <Select options={options} value={selectedOption} onChange={handleChange} />
+                    </div>
                 </div>
-                <ChartLine {...{ flavor, iteration }} />
+                <div className='chart-container'>
+                    <ChartLine {...{ flavor, iteration }} />
+                </div>
             </div>
             <div className='Pie'>
                 <ChartPie {...{ flavor, iteration }} />
@@ -117,3 +141,5 @@ export default function App() {
         </div>
     )
 }
+
+
