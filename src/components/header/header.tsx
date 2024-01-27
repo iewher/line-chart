@@ -13,16 +13,6 @@ interface SelectProps {
   options: { value: string; label: string }[];
 }
 
-const Select: React.FC<SelectProps> = ({ value, onChange, options }) => (
-  <select value={value} onChange={onChange}>
-    {options.map(({ value, label }) => (
-      <option key={value} value={value}>
-        {label}
-      </option>
-    ))}
-  </select>
-);
-
 const timeOptions = Array.from({ length: 168 }, (_, i) => {
   const date = new Date(Date.now() + i * 60 * 60 * 1000);
   const dateStr = `${date.getDate().toString().padStart(2, "0")}.${(
@@ -69,16 +59,16 @@ export default function Header({ iteration, setIteration }: HeaderProps) {
     <div className={styles.Header}>
       <h2>Период:</h2>
       <h2 className={styles.From}>с</h2>
-      <Select
-        value={startInterval}
-        onChange={(e) => setStartInterval(e.target.value)}
+      <SelectC
         options={timeOptions}
+        selectedOption={selectedOption}
+        handleChange={handleChange}
       />
       <h2 className={styles.To}>до</h2>
-      <Select
-        value={endInterval}
-        onChange={(e) => setEndInterval(e.target.value)}
+      <SelectC
         options={timeOptions}
+        selectedOption={selectedOption}
+        handleChange={handleChange}
       />
       <h2 className={styles.Interval}>Интервал:</h2>
       <h2>Направления:</h2>
@@ -89,7 +79,9 @@ export default function Header({ iteration, setIteration }: HeaderProps) {
           handleChange={handleChange}
         />
       </div>
-      <button className={styles.Button} onClick={() => setIteration(iteration)}>Построить</button>
+      <button className={styles.Button} onClick={() => setIteration(iteration)}>
+        Построить
+      </button>
     </div>
   );
 }
