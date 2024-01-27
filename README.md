@@ -1,4 +1,8 @@
-# Quick reference
+# Тестовое задание в компанию "TRAFFIC DATA"
+
+Задание написано на TypeScript, с применение библиотеки @Nivo
+
+Стили написаны на SCSS
 
 <image src="public/forReadme.jpg">
 

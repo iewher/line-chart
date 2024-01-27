@@ -1,123 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto";
 }
 
 body {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
-      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-  
-    margin: 0;
-  
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: #e9e9e9;
-  }
-  
-  .App {
-    text-align: center;
-  }
-  
-  .Button {
-    background: red;
-    border: 2px solid white;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    transition: all 0.2s linear;
-    width: 150px;
-    margin-right: 10px;
-  }
-  
-  .Button:hover {
-    background: white;
-    border-color: #ffffff;
-    color: red;
-    border-color: red;
-  }
+  background: #e9e9e9;
+}
 
-  /*
-  Адаптивность проверил в Toggle device toolbar
-  */
-  
-  .Chart {
-    height: 400px;
-    margin: 0 auto;
-    margin-top: 10px;
-    width: 90%;
-    background: white;
-    box-shadow: 0 0 10px 10px rgba(221, 221, 221, 1);
-    display: block;
-    clear: both;
-    }
-    
-    .text {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    }
-    
-    .HeaderInChart h2 {
-    font-size: 24px;
-    font-weight: bold;
-    }
+.App {
+  text-align: center;
+}
 
-    .Directions {
-      width: 250px;
-    }
-    
-    .Directions h2 {
-    font-size: 18px;
-    margin-right: 20px;
-    }
-    
-    .chart-container {
-    flex: 1;
-    height: 85%;
-    }
+.Chart {
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 90%;
+  background: white;
+  box-shadow: 0 0 10px 10px rgba(221, 221, 221, 1);
+  display: block;
+  clear: both;
+}
 
-  /*
+.text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.HeaderInChart h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.chart-container {
+  flex: 1;
+  height: 85%;
+}
+
+/*
   Адаптивность проверил в Toggle device toolbar
   */
 
-  .Pie {
-    height: 400px;
-    margin: 0 auto;
-    margin-left: 95px;
-    padding: 0 30px;
-    width: 35%;
-    background: white;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /*
-  Адаптивность проверил в Toggle device toolbar
-  */
-
-  .header {
-    background: white;
-    height: 50px;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 0 10px 10px rgba(221, 221, 221, 1); 
-  }
-
-  .header h2 {
-    font-size: 15px;
-    margin-left: 20px;
-  }
-
-  .header .from, .header .to, .header .interval {
-    margin-left: 30px;
-    margin-right: 10px;
-  }
+.Pie {
+  height: 400px;
+  margin: 0 auto;
+  margin-left: 95px;
+  padding: 0 30px;
+  width: 35%;
+  background: white;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
